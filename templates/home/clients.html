@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Our Clients — Sea Cox's Fire & Safety{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://seacoxfire.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Clients", "item": "https://seacoxfire.com/clients/"}
+    ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="page-header-bg">
+        <img src="{% static 'assets/images/slide1.jpg' %}" alt="Our Clients" loading="eager">
+    </div>
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+        <h1>Our Clients</h1>
+        <div class="breadcrumb">
+            <a href="{% url 'home:home' %}">Home</a>
+            <span class="separator">/</span>
+            <span class="current">Our Clients</span>
+        </div>
+    </div>
+</section>
+
+<!-- Clients -->
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="label">Trusted Partners</span>
+            <h2>Our <span class="highlight">Clients</span></h2>
+            <p>Serving prestigious clients across Dubai and the UAE</p>
+        </div>
+        <div class="grid-3 fade-in">
+            {% for client in clients %}
+            <div class="client-card">
+                <div class="client-img-wrap">
+                    <img src="/media/{{ client.img }}" alt="{{ client.title }}" loading="lazy">
+                </div>
+                <div class="client-info">
+                    <h5>{{ client.title }}</h5>
+                    <span><i class="fas fa-map-marker-alt"></i> {{ client.address }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

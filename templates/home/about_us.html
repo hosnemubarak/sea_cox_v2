@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About Us — Sea Cox's Fire & Safety{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://seacoxfire.com/"},
+        {"@type": "ListItem", "position": 2, "name": "About Us", "item": "https://seacoxfire.com/about/"}
+    ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="page-header-bg">
+        <img src="{% static 'assets/images/slide1.jpg' %}" alt="About Us" loading="eager">
+    </div>
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+        <h1>About Us</h1>
+        <div class="breadcrumb">
+            <a href="{% url 'home:home' %}">Home</a>
+            <span class="separator">/</span>
+            <span class="current">About Us</span>
+        </div>
+    </div>
+</section>
+
+<!-- About Content -->
+<section class="section">
+    <div class="container">
+        <div class="about-content fade-in">
+            <div class="about-text">
+                <div class="section-header" style="text-align: left; margin-bottom: 24px;">
+                    <span class="label">Who We Are</span>
+                    <h2>About <span class="highlight">Sea Cox's Fire & Safety</span></h2>
+                </div>
+                <p>{{ about_text | linebreaksbr }}</p>
+
+                <h3 style="font-size: 1.3rem; margin-top: 32px; margin-bottom: 16px;">Core Values</h3>
+                <ul class="values-list">
+                    {% for value in core_values %}
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        {{ value }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="about-img">
+                <img src="{% static 'assets/images/abt-img3.jpg' %}" alt="About Sea Cox's Fire & Safety" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section section">
+    <div class="stats-bg">
+        <img src="{% static 'assets/images/para-new.png' %}" alt="Background" loading="lazy">
+    </div>
+    <div class="stats-overlay"></div>
+    <div class="stats-content container">
+        <div class="section-header fade-in" style="margin-bottom: 48px;">
+            <span class="label">Our Track Record</span>
+            <h2 style="color: var(--white);">Few Facts About <span class="highlight">SCFS</span></h2>
+            <p>We provide all types of fire safety design, supply, engineering, installation, testing, commissioning and
+                maintenance services to local authorities, educational authorities, hotels, industrial sites and many
+                more commercial applications.</p>
+        </div>
+        <div class="grid-4 fade-in">
+            {% for stat in stats %}
+            <div class="stat-item">
+                <div class="stat-value">
+                    <span class="counter-value" data-target="{{ stat.value }}">0</span>+
+                </div>
+                <div class="stat-label">{{ stat.label }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

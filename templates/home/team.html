@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Our Team — Sea Cox's Fire & Safety{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://seacoxfire.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Team", "item": "https://seacoxfire.com/team/"}
+    ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="page-header-bg">
+        <img src="{% static 'assets/images/parallax1.jpg' %}" alt="Our Team" loading="eager">
+    </div>
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+        <h1>Our Team</h1>
+        <div class="breadcrumb">
+            <a href="{% url 'home:home' %}">Home</a>
+            <span class="separator">/</span>
+            <span class="current">Our Team</span>
+        </div>
+    </div>
+</section>
+
+<!-- Team -->
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="label">Meet Our Experts</span>
+            <h2>Sea Cox's <span class="highlight">Team</span></h2>
+            <p>Fire fighters are always ready to help and care</p>
+        </div>
+        <div class="grid-3 fade-in" style="max-width: 800px; margin: 0 auto;">
+            {% for member in teams %}
+            <div class="team-card">
+                <div class="team-img-wrap">
+                    <img src="/media/{{ member.img }}" alt="{{ member.title }}" loading="lazy">
+                    <div class="team-social">
+                        <a href="{{ member.facebook_url }}" target="_blank" aria-label="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="{{ member.twitter_url }}" target="_blank" aria-label="Twitter"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="{{ member.linkedin_url }}" target="_blank" aria-label="LinkedIn"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h5>{{ member.title }}</h5>
+                    <span>{{ member.designation }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

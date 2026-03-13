@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ article.title }} — Sea Cox's Fire & Safety{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://seacoxfire.com/"},
+        {"@type": "ListItem", "position": 2, "name": "News", "item": "https://seacoxfire.com/news/"},
+        {"@type": "ListItem", "position": 3, "name": "{{ article.title }}", "item": "https://seacoxfire.com/news/{{ article.slug }}/"}
+    ]
+}
+</script>
+{% if article %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ article.title }}",
+    "description": "{{ article.content }}",
+    "image": "https://seacoxfire.com/media/{{ article.img }}",
+    "datePublished": "{{ article.created_on }}",
+    "dateModified": "{{ article.updated_on }}",
+    "author": {
+        "@type": "Organization",
+        "name": "Sea Cox's Fire & Safety LLC"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Sea Cox's Fire & Safety LLC",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://seacoxfire.com{% static 'assets/images/logo-final.png' %}"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://seacoxfire.com/news/{{ article.slug }}/"
+    }
+}
+</script>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="page-header-bg">
+        <img src="{% static 'assets/images/parallax1.jpg' %}" alt="News Details" loading="eager">
+    </div>
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+        <h1>News Details</h1>
+        <div class="breadcrumb">
+            <a href="{% url 'home:home' %}">Home</a>
+            <span class="separator">/</span>
+            <a href="{% url 'home:news' %}">News</a>
+            <span class="separator">/</span>
+            <span class="current">Details</span>
+        </div>
+    </div>
+</section>
+
+<!-- News Detail -->
+<section class="section">
+    <div class="container">
+        {% if article %}
+        <div class="grid-3" style="grid-template-columns: 2fr 1fr; gap: 40px;">
+            <!-- Main Content -->
+            <div class="fade-in">
+                <div class="news-detail-img">
+                    <img src="/media/{{ article.img }}" alt="{{ article.title }}" loading="lazy">
+                </div>
+                <div class="news-detail-content">
+                    <div class="meta">
+                        <span><i class="far fa-clock"></i> {{ article.created_on }}</span>
+                        <span><i class="far fa-user"></i> {{ article.author }}</span>
+                    </div>
+                    <h2>{{ article.title }}</h2>
+                    <div
+                        style="background: var(--slate-50); border-left: 4px solid var(--fire-primary); padding: 24px 28px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-top: 24px;">
+                        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--slate-600); font-style: italic;">
+                            {{ article.content }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="fade-in">
+                <!-- Recent Posts -->
+                <div class="sidebar-card">
+                    <h5>Latest Posts</h5>
+                    {% for item in recent_news %}
+                    <div class="sidebar-news-item">
+                        <img src="/media/{{ item.img }}" alt="{{ item.title }}" loading="lazy">
+                        <div>
+                            <h6><a href="{% url 'home:news_details' item.slug %}">{{ item.title }}</a></h6>
+                            <span><i class="far fa-calendar-alt"></i> {{ item.created_on }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Follow Us -->
+                <div class="sidebar-card">
+                    <h5>Follow Us</h5>
+                    <div class="social-links">
+                        <a href="{{ site_info.fb_link }}" target="_blank" aria-label="Facebook"
+                            style="background: rgba(230,57,70,0.08); color: var(--fire-primary);"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="{{ site_info.twitter_link }}" target="_blank" aria-label="Twitter"
+                            style="background: rgba(230,57,70,0.08); color: var(--fire-primary);"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="{{ site_info.linkedin_link }}" target="_blank" aria-label="LinkedIn"
+                            style="background: rgba(230,57,70,0.08); color: var(--fire-primary);"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="{{ site_info.instagram_link }}" target="_blank" aria-label="Instagram"
+                            style="background: rgba(230,57,70,0.08); color: var(--fire-primary);"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center" style="padding: 80px 0;">
+            <h3>Article not found</h3>
+            <p style="color: var(--slate-500); margin-top: 12px;">The article you're looking for doesn't exist.</p>
+            <a href="{% url 'home:news' %}" class="btn btn-primary" style="margin-top: 24px;">
+                <i class="fas fa-arrow-left"></i> Back to News
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

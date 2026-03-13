@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home — Sea Cox's Fire &amp; Safety{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Sea Cox's Fire & Safety LLC",
+    "url": "https://seacoxfire.com",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://seacoxfire.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Sea Cox's Fire & Safety LLC",
+    "image": "https://seacoxfire.com{% static 'assets/images/logo-final.png' %}",
+    "url": "https://seacoxfire.com",
+    "telephone": "+971556540461",
+    "email": "seacoxsfirensafety@gmail.com",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Naïf Road, Al Nakhil Deira, Shop No 1",
+        "addressLocality": "Dubai",
+        "addressRegion": "Dubai",
+        "addressCountry": "AE"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 25.2744,
+        "longitude": 55.3032
+    },
+    "openingHoursSpecification": [
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+            "opens": "08:00",
+            "closes": "18:00"
+        },
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Friday",
+            "opens": "08:00",
+            "closes": "12:00"
+        }
+    ],
+    "priceRange": "$$",
+    "areaServed": {
+        "@type": "City",
+        "name": "Dubai"
+    },
+    "serviceType": [
+        "Fire Alarm Installation",
+        "Fire Fighting Systems",
+        "Fire Safety Maintenance",
+        "Fire Protection Engineering",
+        "Fire Equipment Supply"
+    ],
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "85"
+    }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-bg">
+        <img src="{% static 'assets/images/slide1.jpg' %}" alt="Fire Safety Background" loading="eager">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-shield-alt"></i>
+                DCD Grade A+ Approved Fire Protection Company
+            </div>
+            <h1>Welcome to <span>Sea Cox's Fire & Safety</span></h1>
+            <p>Your trusted partner for comprehensive fire protection, safety solutions, and engineering services in
+                Dubai. ISO accredited and NFPA member since 2020.</p>
+            <div class="hero-buttons">
+                <a href="{% url 'home:about_us' %}" class="btn btn-primary">
+                    <i class="fas fa-arrow-right"></i> Learn More
+                </a>
+                <a href="{% url 'home:contact' %}" class="btn btn-outline">
+                    <i class="fas fa-phone"></i> Contact Us
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Brief Section -->
+<section class="section">
+    <div class="container">
+        <div class="about-content fade-in">
+            <div class="about-text">
+                <div class="section-header" style="text-align: left; margin-bottom: 24px;">
+                    <span class="label">About Our Company</span>
+                    <h2>Civil Defense Approved Grade A+ <span class="highlight">Fire Protection</span></h2>
+                </div>
+                <p>{{ about_text | linebreaksbr }}</p>
+            </div>
+            <div class="about-img">
+                <img src="{% static 'assets/images/10.jpg' %}" alt="Sea Cox's Fire & Safety Operations" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="section section-gray">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="label">What We Do</span>
+            <h2>Our <span class="highlight">Services</span></h2>
+            <p>Comprehensive fire protection and safety solutions engineered to meet your needs</p>
+        </div>
+        <div class="grid-3 fade-in">
+            {% for category in services_categories %}
+            <div class="service-category">
+                <div class="cat-icon">
+                    <i class="{{ category.icon }}"></i>
+                </div>
+                <h4>{{ category.title }}</h4>
+                <ul>
+                    {% for item in category.items %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Products Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="label">Fire Safety Equipment</span>
+            <h2>Our <span class="highlight">Products</span></h2>
+            <p>Top-quality fire detection, alarm, and suppression systems</p>
+        </div>
+        <div class="grid-4 fade-in">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="/media/{{ product.img }}" alt="{{ product.title }}" loading="lazy">
+                </div>
+                <h5>{{ product.title }}</h5>
+                <p>{{ product.body|truncatewords:15 }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="view-more">
+            <a href="{% url 'home:services' %}" class="btn btn-dark">
+                <i class="fas fa-th-large"></i> View All Products
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Clients Section -->
+<section class="section section-gray">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="label">Trusted Partners</span>
+            <h2>Our <span class="highlight">Clients</span></h2>
+            <p>Serving prestigious clients across Dubai and the UAE</p>
+        </div>
+        <div class="grid-3 fade-in">
+            {% for client in clients %}
+            <a href="{% url 'home:clients' %}" class="client-card">
+                <div class="client-img-wrap">
+                    <img src="/media/{{ client.img }}" alt="{{ client.title }}" loading="lazy">
+                </div>
+                <div class="client-info">
+                    <h5>{{ client.title }}</h5>
+                    <span><i class="fas fa-map-marker-alt"></i> {{ client.address }}</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="view-more">
+            <a href="{% url 'home:clients' %}" class="btn btn-dark">
+                <i class="fas fa-users"></i> View All Clients
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Video Section -->
+<section class="section section-dark" style="padding: 80px 0;">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="label">Watch Us In Action</span>
+            <h2>Operational <span class="highlight">Videos</span></h2>
+            <p>See our expert team at work on various fire safety projects</p>
+        </div>
+        <div class="grid-4 fade-in">
+            {% for video in videos %}
+            <a href="{{ video.url }}" target="_blank" class="video-card">
+                <div class="video-overlay"></div>
+                <img src="/media/{{ video.img }}" alt="Operational Video" loading="lazy">
+                <div class="play-btn">
+                    <i class="fas fa-play"></i>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section section">
+    <div class="stats-bg">
+        <img src="{% static 'assets/images/para-new.png' %}" alt="Background" loading="lazy">
+    </div>
+    <div class="stats-overlay"></div>
+    <div class="stats-content container">
+        <div class="section-header fade-in" style="margin-bottom: 48px;">
+            <span class="label">Our Track Record</span>
+            <h2 style="color: var(--white);">Few Facts About <span class="highlight">SCFS</span></h2>
+            <p>We provide all types of fire safety design, supply, engineering, installation, testing, commissioning and
+                maintenance services.</p>
+        </div>
+        <div class="grid-4 fade-in">
+            {% for stat in stats %}
+            <div class="stat-item">
+                <div class="stat-value">
+                    <span class="counter-value" data-target="{{ stat.value }}">0</span>+
+                </div>
+                <div class="stat-label">{{ stat.label }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="label">Meet Our Experts</span>
+            <h2>Sea Cox's <span class="highlight">Team</span></h2>
+            <p>Fire fighters are always ready to help and care</p>
+        </div>
+        <div class="grid-3 fade-in" style="max-width: 800px; margin: 0 auto;">
+            {% for member in teams %}
+            <div class="team-card">
+                <div class="team-img-wrap">
+                    <img src="/media/{{ member.img }}" alt="{{ member.title }}" loading="lazy">
+                    <div class="team-social">
+                        <a href="{{ member.facebook_url }}" target="_blank" aria-label="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="{{ member.twitter_url }}" target="_blank" aria-label="Twitter"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="{{ member.linkedin_url }}" target="_blank" aria-label="LinkedIn"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h5>{{ member.title }}</h5>
+                    <span>{{ member.designation }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="view-more">
+            <a href="{% url 'home:team' %}" class="btn btn-dark">
+                <i class="fas fa-users"></i> View Full Team
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- News Section -->
+<section class="section section-gray">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="label">Latest Updates</span>
+            <h2>News & <span class="highlight">Certificates</span></h2>
+        </div>
+        <div class="grid-2 fade-in" style="max-width: 900px; margin: 0 auto;">
+            {% for article in news %}
+            <a href="{% url 'home:news_details' article.slug %}" class="news-card">
+                <div class="news-img-wrap">
+                    <img src="/media/{{ article.img }}" alt="{{ article.title }}" loading="lazy">
+                </div>
+                <div class="news-body">
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> {{ article.created_on }}
+                    </div>
+                    <h5>{{ article.title }}</h5>
+                    <p>{{ article.content|truncatewords:20 }}</p>
+                    <span class="read-more">View Details <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="view-more">
+            <a href="{% url 'home:news' %}" class="btn btn-dark">
+                <i class="fas fa-newspaper"></i> View All News
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

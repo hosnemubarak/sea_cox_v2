@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Services — Sea Cox's Fire &amp; Safety{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://seacoxfire.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://seacoxfire.com/services/"}
+    ]
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Fire Protection Services",
+    "provider": {
+        "@type": "Organization",
+        "name": "Sea Cox's Fire & Safety LLC"
+    },
+    "areaServed": {"@type": "City", "name": "Dubai"},
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Fire Safety Services",
+        "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Fire Alarm System Installation"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Fire Fighting System Maintenance"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Fire Safety Projects & Fit-outs"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Fire Pump Installation"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sprinkler System Installation"}}
+        ]
+    }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="page-header-bg">
+        <img src="{% static 'assets/images/slide1.jpg' %}" alt="Our Services" loading="eager">
+    </div>
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+        <h1>Our Services</h1>
+        <div class="breadcrumb">
+            <a href="{% url 'home:home' %}">Home</a>
+            <span class="separator">/</span>
+            <span class="current">Our Services</span>
+        </div>
+    </div>
+</section>
+
+<!-- Services Categories -->
+<section class="section section-gray">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="label">What We Offer</span>
+            <h2>Our <span class="highlight">Services</span></h2>
+            <p>Comprehensive fire protection and safety solutions</p>
+        </div>
+        <div class="grid-3 fade-in">
+            {% for category in services_categories %}
+            <div class="service-category">
+                <div class="cat-icon">
+                    <i class="{{ category.icon }}"></i>
+                </div>
+                <h4>{{ category.title }}</h4>
+                <ul>
+                    {% for item in category.items %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Products -->
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="label">Fire Safety Equipment</span>
+            <h2>Our <span class="highlight">Products</span></h2>
+            <p>Top-quality fire detection, alarm, and suppression systems</p>
+        </div>
+        <div class="grid-4 fade-in">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="/media/{{ product.img }}" alt="{{ product.title }}" loading="lazy">
+                </div>
+                <h5>{{ product.title }}</h5>
+                <p>{{ product.body }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

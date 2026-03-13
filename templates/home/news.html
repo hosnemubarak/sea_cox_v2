@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}News & Updates — Sea Cox's Fire & Safety{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://seacoxfire.com/"},
+        {"@type": "ListItem", "position": 2, "name": "News & Updates", "item": "https://seacoxfire.com/news/"}
+    ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="page-header-bg">
+        <img src="{% static 'assets/images/parallax1.jpg' %}" alt="News & Updates" loading="eager">
+    </div>
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+        <h1>News & Updates</h1>
+        <div class="breadcrumb">
+            <a href="{% url 'home:home' %}">Home</a>
+            <span class="separator">/</span>
+            <span class="current">News & Updates</span>
+        </div>
+    </div>
+</section>
+
+<!-- News -->
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="label">Latest Updates</span>
+            <h2>News & <span class="highlight">Certificates</span></h2>
+        </div>
+        <div class="grid-3 fade-in">
+            {% for article in news %}
+            <a href="{% url 'home:news_details' article.slug %}" class="news-card">
+                <div class="news-img-wrap">
+                    <img src="/media/{{ article.img }}" alt="{{ article.title }}" loading="lazy">
+                </div>
+                <div class="news-body">
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> {{ article.created_on }}
+                    </div>
+                    <h5>{{ article.title }}</h5>
+                    <p>{{ article.content|truncatewords:20 }}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                        <span class="read-more">View Details <i class="fas fa-arrow-right"></i></span>
+                        <span style="font-size: 0.78rem; color: var(--slate-400);">
+                            <i class="fas fa-user" style="color: var(--fire-primary); margin-right: 4px;"></i>
+                            {{article.author}}
+                        </span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,437 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO: Title -->
+    <title>{% if seo.title %}{{ seo.title }}{% else %}SCFS — {% block title %}Sea Cox's Fire And Safety{% endblock %}{% endif %}</title>
+
+    <!-- SEO: Meta Description -->
+    {% if seo.meta_description %}
+    <meta name="description" content="{{ seo.meta_description }}">
+    {% else %}
+    <meta name="description"
+        content="Sea Cox's Fire & Safety LLC — DCD Grade A+ Fire Protection Company in Dubai. Expert fire alarm, firefighting, and safety solutions.">
+    {% endif %}
+
+    <!-- SEO: Meta Keywords -->
+    {% if seo.meta_keywords %}
+    <meta name="keywords" content="{{ seo.meta_keywords }}">
+    {% endif %}
+
+    <!-- SEO: Canonical URL -->
+    {% if seo.canonical_url %}
+    <link rel="canonical" href="{{ seo.canonical_url }}">
+    {% endif %}
+
+    <!-- SEO: Robots -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <!-- SEO: Open Graph -->
+    <meta property="og:type" content="{{ seo.og_type|default:'website' }}">
+    <meta property="og:title" content="{{ seo.title|default:'Sea Cox Fire & Safety LLC' }}">
+    <meta property="og:description"
+        content="{{ seo.meta_description|default:'DCD Grade A+ Fire Protection Company in Dubai' }}">
+    <meta property="og:url" content="{{ seo.canonical_url|default:'https://seacoxfire.com' }}">
+    <meta property="og:site_name" content="{{ seo.site_name|default:'Sea Cox Fire & Safety LLC' }}">
+    <meta property="og:locale" content="{{ seo.locale|default:'en_US' }}">
+    {% if seo.og_image %}
+    <meta property="og:image" content="{{ seo.og_image }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    {% endif %}
+
+    <!-- SEO: Article-specific OG (for news) -->
+    {% if seo.og_type == 'article' %}
+    {% if seo.article_published %}
+    <meta property="article:published_time" content="{{ seo.article_published }}">{% endif %}
+    {% if seo.article_modified %}
+    <meta property="article:modified_time" content="{{ seo.article_modified }}">{% endif %}
+    {% if seo.article_author %}
+    <meta property="article:author" content="{{ seo.article_author }}">{% endif %}
+    {% endif %}
+
+    <!-- SEO: Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ seo.title|default:'Sea Cox Fire & Safety LLC' }}">
+    <meta name="twitter:description"
+        content="{{ seo.meta_description|default:'DCD Grade A+ Fire Protection Company in Dubai' }}">
+    {% if seo.og_image %}
+    <meta name="twitter:image" content="{{ seo.og_image }}">{% endif %}
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0A1628">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/logo-final-2.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'assets/images/logo-final-2.png' %}">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Font Awesome 6 (async load) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </noscript>
+
+    <!-- Modern CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/modern.css' %}">
+
+    <!-- Structured Data: Organization (site-wide) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Sea Cox's Fire & Safety LLC",
+        "alternateName": "SCFS",
+        "url": "https://seacoxfire.com",
+        "logo": "https://seacoxfire.com{% static 'assets/images/logo-final.png' %}",
+        "description": "DCD Grade A+ approved fire protection company in Dubai providing fire alarm systems, firefighting equipment, and fire engineering services.",
+        "foundingDate": "2020",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Naïf Road, Al Nakhil Deira, Shop No 1, Building: KHALIFA OBAID SAIF ALMARRI",
+            "addressLocality": "Dubai",
+            "addressCountry": "AE"
+        },
+        "contactPoint": [
+            {
+                "@type": "ContactPoint",
+                "telephone": "+971-55-654-0461",
+                "contactType": "sales",
+                "areaServed": "AE",
+                "availableLanguage": ["English", "Arabic"]
+            },
+            {
+                "@type": "ContactPoint",
+                "telephone": "+971-50-918-2997",
+                "contactType": "customer service",
+                "areaServed": "AE"
+            }
+        ],
+        "email": "seacoxsfirensafety@gmail.com",
+        "sameAs": [
+            "{{ site_info.fb_link }}",
+            "{{ site_info.linkedin_link }}",
+            "{{ site_info.instagram_link }}"
+        ],
+        "memberOf": {
+            "@type": "Organization",
+            "name": "National Fire Protection Association (NFPA)"
+        },
+        "hasCredential": [
+            {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "license",
+                "name": "DCD Grade A+ Fire Protection License"
+            },
+            {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "certification",
+                "name": "ISO Accreditation (License No. 89073)"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Structured Data: Page-specific -->
+    {% block structured_data %}{% endblock %}
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar" id="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <a href="mailto:{{ site_info.email }}">
+                    <i class="fas fa-envelope"></i> {{ site_info.email }}
+                </a>
+                <span>
+                    <i class="fas fa-phone"></i> {{ site_info.phone_1 }}
+                </span>
+                <span>
+                    <i class="fas fa-phone"></i> {{ site_info.phone_2 }}
+                </span>
+            </div>
+            <div class="top-bar-right">
+                <a href="{{ site_info.fb_link }}" target="_blank" rel="noopener" title="Facebook"
+                    aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="{{ site_info.twitter_link }}" target="_blank" rel="noopener" title="Twitter"
+                    aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="{{ site_info.linkedin_link }}" target="_blank" rel="noopener" title="LinkedIn"
+                    aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="{{ site_info.instagram_link }}" target="_blank" rel="noopener" title="Instagram"
+                    aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a href="{% url 'home:home' %}" class="navbar-brand" aria-label="Sea Cox's Fire & Safety - Home">
+                <img src="{% static 'assets/images/logo-final.png' %}" alt="Sea Cox's Fire & Safety Logo" width="56"
+                    height="56">
+                <div class="brand-text">
+                    Sea Cox's
+                    <small>Fire & Safety LLC</small>
+                </div>
+            </a>
+            <div class="nav-links" id="nav-links" role="menubar">
+                <a href="{% url 'home:home' %}" role="menuitem" {% if page_title == 'Home' %}class="active" aria-current="page"{% endif %}>Home</a>
+                <a href="{% url 'home:services' %}" role="menuitem" {% if page_title == 'Services' %}class="active" aria-current="page"{% endif %}>Services</a>
+                <a href="{% url 'home:news' %}" role="menuitem" {% if page_title == 'News & Update' %}class="active" aria-current="page"{% endif %}>News</a>
+                <a href="{% url 'home:clients' %}" role="menuitem" {% if page_title == 'Our Clients' %}class="active" aria-current="page"{% endif %}>Clients</a>
+                <a href="{% url 'home:about_us' %}" role="menuitem" {% if page_title == 'About Us' %}class="active" aria-current="page"{% endif %}>About</a>
+                <a href="{% url 'home:team' %}" role="menuitem" {% if page_title == 'Our Team' %}class="active" aria-current="page"{% endif %}>Team</a>
+                <a href="{% url 'home:contact' %}" role="menuitem" {% if page_title == 'Contact Us' %}class="active" aria-current="page"{% endif %}>Contact</a>
+            </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="grid-4" style="align-items: start;">
+                <!-- Quick Links -->
+                <nav aria-label="Footer navigation">
+                    <h5>Quick Links</h5>
+                    <div class="footer-links">
+                        <a href="{% url 'home:home' %}"><i class="fas fa-chevron-right"></i> Home</a>
+                        <a href="{% url 'home:services' %}"><i class="fas fa-chevron-right"></i> Services</a>
+                        <a href="{% url 'home:news' %}"><i class="fas fa-chevron-right"></i> News</a>
+                        <a href="{% url 'home:clients' %}"><i class="fas fa-chevron-right"></i> Clients</a>
+                        <a href="{% url 'home:about_us' %}"><i class="fas fa-chevron-right"></i> About Us</a>
+                        <a href="{% url 'home:team' %}"><i class="fas fa-chevron-right"></i> Our Team</a>
+                        <a href="{% url 'home:contact' %}"><i class="fas fa-chevron-right"></i> Contact</a>
+                    </div>
+                </nav>
+
+                <!-- Contact Info -->
+                <div>
+                    <h5>Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ site_info.address }}</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ site_info.email }}</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>{{ site_info.phone_2 }}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- About -->
+                <div>
+                    <h5>About SCFS</h5>
+                    <p style="font-size: 0.9rem; line-height: 1.7;">
+                        Sea Cox's Fire & Safety LLC is a Civil Defense Approved Grade A+ Fire Protection Company,
+                        providing comprehensive fire engineering solutions in Dubai since 2020.
+                    </p>
+                    <div class="social-links" style="margin-top: 20px;">
+                        <a href="{{ site_info.fb_link }}" target="_blank" rel="noopener" aria-label="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="{{ site_info.twitter_link }}" target="_blank" rel="noopener" aria-label="Twitter"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="{{ site_info.linkedin_link }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="{{ site_info.instagram_link }}" target="_blank" rel="noopener"
+                            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Working Hours -->
+                <div>
+                    <h5>Working Hours</h5>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Sunday – Thursday<br>8:00 AM – 6:00 PM</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Friday<br>8:00 AM – 12:00 PM</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Saturday<br>Closed</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; <span id="currentYear"></span> <strong>Sea Cox's Fire & Safety LLC</strong>. All Rights
+                    Reserved.</p>
+                <p>Developed by <a href="https://www.linkedin.com/in/hosne-mubarak-2a9a111b9/" target="_blank"
+                        rel="noopener">Hosne Mubarak</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/{{ site_info.whatsapp }}?text=Hello" target="_blank" rel="noopener" class="whatsapp-float"
+        aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script>
+        // Current Year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Mobile Nav Toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const navIcon = navToggle.querySelector('i');
+
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('active');
+            navIcon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+            navToggle.setAttribute('aria-expanded', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        // Close mobile nav on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                navIcon.className = 'fas fa-bars';
+                navToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close mobile nav on outside click
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !navToggle.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                navIcon.className = 'fas fa-bars';
+                navToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Scroll effects: navbar + back-to-top
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('back-to-top');
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
+                    navbar.classList.toggle('scrolled', scrollY > 50);
+                    backToTop.classList.toggle('visible', scrollY > 400);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.08,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Counter animation with easing
+        function animateCounters() {
+            document.querySelectorAll('.counter-value').forEach(counter => {
+                if (counter.dataset.animated) return;
+                counter.dataset.animated = 'true';
+
+                const target = parseInt(counter.dataset.target);
+                const duration = 2200;
+                const start = performance.now();
+
+                function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+                function update(now) {
+                    const elapsed = now - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    counter.textContent = Math.floor(easeOutCubic(progress) * target);
+                    if (progress < 1) requestAnimationFrame(update);
+                }
+
+                requestAnimationFrame(update);
+            });
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            statsObserver.observe(statsSection);
+        }
+
+        // Lazy load images fallback
+        if ('loading' in HTMLImageElement.prototype) {
+            // Native lazy loading supported
+        } else {
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            const imgObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) img.src = img.dataset.src;
+                        imgObserver.unobserve(img);
+                    }
+                });
+            });
+            lazyImages.forEach(img => imgObserver.observe(img));
+        }
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>
