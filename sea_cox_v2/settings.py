@@ -95,12 +95,10 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 # =============================================================================
 # LOGGING CONFIGURATION
 # =============================================================================
-# Log directory — auto-created on startup
-LOG_DIR = BASE_DIR / 'logs'
+from core.logging_utils import get_safe_log_directory
 
-# Ensure the log directory exists before Django configures handlers
-from core.logging_utils import ensure_log_directory  # noqa: E402
-ensure_log_directory()
+# Get a safe, writable log directory (falls back to /tmp/logs if needed)
+LOG_DIR = get_safe_log_directory(BASE_DIR)
 
 # Maximum log file size and backup count
 LOG_MAX_BYTES = int(os.environ.get('LOG_MAX_BYTES', 5 * 1024 * 1024))     # 5 MB

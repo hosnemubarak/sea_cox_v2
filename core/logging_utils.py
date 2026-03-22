@@ -13,34 +13,43 @@ from typing import Optional
 from django.conf import settings
 
 
-def ensure_log_directory():
+def get_safe_log_directory(base_dir: Path) -> Path:
     """
-    Create the log directory (and any parent directories) if they don't exist.
+    Safely create and return a writable log directory.
+    Falls back to /tmp/logs if the primary directory is not writable.
     
-    This function is called automatically during Django startup via the
-    LOGGING configuration in settings.py. It can also be called manually
-    if needed (e.g., in management commands or scripts).
-    
+    Args:
+        base_dir: The Django BASE_DIR path to use as the primary location.
+        
     Returns:
-        Path: The absolute path to the log directory.
+        Path: The absolute path to a writable log directory.
     """
-    log_dir = getattr(settings, 'LOG_DIR', Path(settings.BASE_DIR) / 'logs')
-    log_dir = Path(log_dir)
-
-    try:
-        log_dir.mkdir(parents=True, exist_ok=True)
-        # Ensure proper permissions (owner read/write/execute)
-        if os.name != 'nt':  # Skip on Windows
-            os.chmod(log_dir, 0o755)
-    except OSError as e:
-        # Fall back to stderr if we can't create the log directory
-        import sys
-        print(
-            f"WARNING: Could not create log directory '{log_dir}': {e}",
-            file=sys.stderr,
-        )
-
-    return log_dir
+    primary_dir = base_dir / 'logs'
+    fallback_dir = Path('/tmp/logs')
+    
+    for current_dir in [primary_dir, fallback_dir]:
+        try:
+            current_dir.mkdir(parents=True, exist_ok=True)
+            # Ensure proper permissions (owner read/write/execute)
+            if os.name != 'nt':  # Skip on Windows
+                os.chmod(current_dir, 0o755)
+                
+            # Test write access by creating a temporary file
+            test_file = current_dir / '.write_test'
+            test_file.touch()
+            test_file.unlink()
+            
+            return current_dir
+        except (OSError, PermissionError) as e:
+            import sys
+            print(
+                f"WARNING: Cannot use log directory '{current_dir}': {e}",
+                file=sys.stderr,
+            )
+            continue
+            
+    # Absolute last resort fallback (should rarely happen)
+    return Path('/tmp')
 
 
 def get_logger(name: Optional[str] = None) -> logging.Logger:
