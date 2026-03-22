@@ -1,0 +1,29 @@
+# =============================================================================
+# Sea Cox's Fire & Safety LLC — Docker Compose
+# =============================================================================
+# Simple single-service setup: Django + Gunicorn + WhiteNoise
+# No database, no Nginx, no Redis — just the app
+# =============================================================================
+# Usage:
+#   docker compose up --build        (build & run)
+#   docker compose up -d             (run in background)
+#   docker compose down              (stop)
+#   docker compose logs -f           (follow logs)
+# =============================================================================
+
+services:
+  web:
+    build: .
+    container_name: seacox-web
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      # Persist logs outside the container
+      - ./logs:/app/logs
+      # Persist uploaded media files
+      - ./media:/app/media
+    environment:
+      - DJANGO_SETTINGS_MODULE=sea_cox_v2.settings

@@ -13,7 +13,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-seacoxv2-static-site-
 
 DEBUG = os.environ.get('DEBUG', 'False').lower() in ['true', '1', 't']
 
-ALLOWED_HOSTS = ['*', 'www.seacoxsfire.com', 'seacoxsfire.com']
+ALLOWED_HOSTS = os.environ.get(
+    'ALLOWED_HOSTS',
+    'localhost,127.0.0.1,seacoxsfire.com,www.seacoxsfire.com'
+).split(',')
 
 INSTALLED_APPS = [
     'django.contrib.staticfiles',

@@ -1,0 +1,53 @@
+# =============================================================================
+# Docker ignore — exclude unnecessary files from the Docker build context
+# =============================================================================
+# This reduces build time and image size significantly
+
+# Version control
+.git
+.gitignore
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Docker files (no need to copy these into the image)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Logs (mounted as volume instead)
+logs/
+*.log
+error.txt
+
+# Collected static files (rebuilt during docker build)
+staticfiles/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation & misc
+README.md
+*.md
+
+# Environment file (loaded via docker-compose, not baked into image)
+.env
+.env.*
+!.env.example
