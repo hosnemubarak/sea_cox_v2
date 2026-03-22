@@ -37,6 +37,7 @@ db.sqlite3-journal
 # Project specific
 error.txt
 error.log
+logs/
 staticfiles/
 .idea/
 .vscode/
