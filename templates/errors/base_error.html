@@ -1,0 +1,380 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ error_code }} — {{ error_title }} | Sea Cox's Fire &amp; Safety LLC</title>
+
+    <!-- SEO: noindex error pages -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="{{ error_title }} — Sea Cox's Fire &amp; Safety LLC">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0A1628">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/logo-final-2.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'assets/images/logo-final-2.png' %}">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </noscript>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/modern.css' %}">
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar" id="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <a href="mailto:{{ site_info.email }}">
+                    <i class="fas fa-envelope"></i> {{ site_info.email }}
+                </a>
+                <span>
+                    <i class="fas fa-phone"></i> {{ site_info.phone_1 }}
+                </span>
+                <span>
+                    <i class="fas fa-phone"></i> {{ site_info.phone_2 }}
+                </span>
+            </div>
+            <div class="top-bar-right">
+                <a href="{{ site_info.fb_link }}" target="_blank" rel="noopener" title="Facebook"
+                    aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="{{ site_info.twitter_link }}" target="_blank" rel="noopener" title="Twitter"
+                    aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="{{ site_info.linkedin_link }}" target="_blank" rel="noopener" title="LinkedIn"
+                    aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="{{ site_info.instagram_link }}" target="_blank" rel="noopener" title="Instagram"
+                    aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a href="/" class="navbar-brand" aria-label="Sea Cox's Fire &amp; Safety - Home">
+                <img src="{% static 'assets/images/logo-final.png' %}" alt="Sea Cox's Fire &amp; Safety Logo"
+                    width="56" height="56">
+                <div class="brand-text">
+                    Sea Cox's
+                    <small>Fire &amp; Safety LLC</small>
+                </div>
+            </a>
+            <div class="nav-links" id="nav-links" role="menubar">
+                <a href="/" role="menuitem">Home</a>
+                <a href="/services/" role="menuitem">Services</a>
+                <a href="/news/" role="menuitem">News</a>
+                <a href="/clients/" role="menuitem">Clients</a>
+                <a href="/about/" role="menuitem">About</a>
+                <a href="/team/" role="menuitem">Team</a>
+                <a href="/contact/" role="menuitem">Contact</a>
+            </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Error Content -->
+    <main>
+        <section class="error-hero">
+            <!-- Animated background elements -->
+            <div class="error-hero-bg">
+                <div class="error-grid-pattern"></div>
+                <div class="error-glow error-glow-1"></div>
+                <div class="error-glow error-glow-2"></div>
+                <div class="error-glow error-glow-3"></div>
+                <!-- Floating embers -->
+                <div class="error-embers">
+                    <span class="ember"></span>
+                    <span class="ember"></span>
+                    <span class="ember"></span>
+                    <span class="ember"></span>
+                    <span class="ember"></span>
+                    <span class="ember"></span>
+                    <span class="ember"></span>
+                    <span class="ember"></span>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="error-hero-content">
+                    <!-- Error badge -->
+                    <div class="error-badge" id="error-badge">
+                        <i class="{{ error_icon }}"></i>
+                        <span>{{ error_title }}</span>
+                    </div>
+
+                    <!-- Giant error code -->
+                    <div class="error-code-hero" id="error-code-hero">
+                        <span class="error-code-bg" aria-hidden="true">{{ error_code }}</span>
+                        <span class="error-code-fg">{{ error_code }}</span>
+                    </div>
+
+                    <!-- Title & Description -->
+                    <h1 class="error-hero-title" id="error-hero-title">
+                        Oops! {{ error_title }}
+                    </h1>
+                    <p class="error-hero-desc" id="error-hero-desc">
+                        {{ error_message }}
+                    </p>
+
+                    <!-- Action buttons -->
+                    <div class="error-hero-actions" id="error-hero-actions">
+                        <a href="/" class="btn btn-primary btn-lg" id="error-go-home">
+                            <i class="fas fa-home"></i> Back to Home
+                        </a>
+                        <a href="/contact/" class="btn btn-glass" id="error-contact-support">
+                            <i class="fas fa-headset"></i> Contact Support
+                        </a>
+                        <button onclick="window.location.reload()" class="btn btn-ghost" id="error-retry">
+                            <i class="fas fa-redo-alt"></i> Try Again
+                        </button>
+                    </div>
+
+                    <!-- Glassmorphic Error Details Card -->
+                    <div class="error-info-card" id="error-info-card">
+                        <div class="error-info-header" id="error-info-toggle">
+                            <div class="error-info-header-left">
+                                <div class="error-info-dot"></div>
+                                <span>Error Information</span>
+                            </div>
+                            <i class="fas fa-chevron-down error-info-chevron"></i>
+                        </div>
+                        <div class="error-info-body" id="error-info-body">
+                            <div class="error-info-grid">
+                                <div class="error-info-item">
+                                    <div class="error-info-label">
+                                        <i class="fas fa-fingerprint"></i> Error ID
+                                    </div>
+                                    <div class="error-info-value error-id-copyable" id="error-id-copyable"
+                                         title="Click to copy">
+                                        <code>{{ error_id }}</code>
+                                        <button class="copy-btn" aria-label="Copy Error ID">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="error-info-item">
+                                    <div class="error-info-label">
+                                        <i class="fas fa-route"></i> Requested Path
+                                    </div>
+                                    <div class="error-info-value">
+                                        <code>{{ request_path }}</code>
+                                    </div>
+                                </div>
+                                <div class="error-info-item">
+                                    <div class="error-info-label">
+                                        <i class="fas fa-clock"></i> Timestamp
+                                    </div>
+                                    <div class="error-info-value">
+                                        <code>{{ timestamp }}</code>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="error-info-tip">
+                                <i class="fas fa-lightbulb"></i>
+                                Reference the <strong>Error ID</strong> when contacting support for faster resolution.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="grid-4" style="align-items: start;">
+                <!-- Quick Links -->
+                <nav aria-label="Footer navigation">
+                    <h5>Quick Links</h5>
+                    <div class="footer-links">
+                        <a href="/"><i class="fas fa-chevron-right"></i> Home</a>
+                        <a href="/services/"><i class="fas fa-chevron-right"></i> Services</a>
+                        <a href="/news/"><i class="fas fa-chevron-right"></i> News</a>
+                        <a href="/clients/"><i class="fas fa-chevron-right"></i> Clients</a>
+                        <a href="/about/"><i class="fas fa-chevron-right"></i> About Us</a>
+                        <a href="/team/"><i class="fas fa-chevron-right"></i> Our Team</a>
+                        <a href="/contact/"><i class="fas fa-chevron-right"></i> Contact</a>
+                    </div>
+                </nav>
+
+                <!-- Contact Info -->
+                <div>
+                    <h5>Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ site_info.address }}</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ site_info.email }}</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>{{ site_info.phone_2 }}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- About -->
+                <div>
+                    <h5>About SCFS</h5>
+                    <p style="font-size: 0.9rem; line-height: 1.7;">
+                        Sea Cox's Fire &amp; Safety LLC is a Civil Defense Approved Grade A+ Fire Protection Company,
+                        providing comprehensive fire engineering solutions in Dubai since 2020.
+                    </p>
+                    <div class="social-links" style="margin-top: 20px;">
+                        <a href="{{ site_info.fb_link }}" target="_blank" rel="noopener" aria-label="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="{{ site_info.twitter_link }}" target="_blank" rel="noopener" aria-label="Twitter"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="{{ site_info.linkedin_link }}" target="_blank" rel="noopener"
+                            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="{{ site_info.instagram_link }}" target="_blank" rel="noopener"
+                            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Working Hours -->
+                <div>
+                    <h5>Working Hours</h5>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Sunday – Thursday<br>8:00 AM – 6:00 PM</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Friday<br>8:00 AM – 12:00 PM</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Saturday<br>Closed</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; <span id="currentYear"></span> <strong>Sea Cox's Fire &amp; Safety LLC</strong>. All Rights
+                    Reserved.</p>
+                <p>Developed by <a href="https://www.linkedin.com/in/hosne-mubarak-2a9a111b9/" target="_blank"
+                        rel="noopener">Hosne Mubarak</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/{{ site_info.whatsapp }}?text=Hello" target="_blank" rel="noopener" class="whatsapp-float"
+        aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // Current Year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Mobile Nav Toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const navIcon = navToggle.querySelector('i');
+
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('active');
+            navIcon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+            navToggle.setAttribute('aria-expanded', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        // Close mobile nav on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                navIcon.className = 'fas fa-bars';
+                navToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close mobile nav on outside click
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !navToggle.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                navIcon.className = 'fas fa-bars';
+                navToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Error info card toggle
+        const infoToggle = document.getElementById('error-info-toggle');
+        const infoBody = document.getElementById('error-info-body');
+        const infoCard = document.getElementById('error-info-card');
+
+        if (infoToggle && infoBody) {
+            infoToggle.addEventListener('click', () => {
+                const isExpanded = infoCard.classList.toggle('expanded');
+                infoToggle.querySelector('.error-info-chevron').classList.toggle('rotated', isExpanded);
+            });
+        }
+
+        // Copy error ID
+        const copyable = document.getElementById('error-id-copyable');
+        if (copyable) {
+            copyable.addEventListener('click', () => {
+                const code = copyable.querySelector('code');
+                const btn = copyable.querySelector('.copy-btn i');
+                navigator.clipboard.writeText(code.textContent.trim()).then(() => {
+                    btn.className = 'fas fa-check';
+                    copyable.classList.add('copied');
+                    setTimeout(() => {
+                        btn.className = 'fas fa-copy';
+                        copyable.classList.remove('copied');
+                    }, 2000);
+                });
+            });
+        }
+
+        // Stagger animations on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const items = [
+                'error-badge',
+                'error-code-hero',
+                'error-hero-title',
+                'error-hero-desc',
+                'error-hero-actions',
+                'error-info-card'
+            ];
+            items.forEach((id, i) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.style.animationDelay = `${i * 0.12}s`;
+                    el.classList.add('animate-in');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

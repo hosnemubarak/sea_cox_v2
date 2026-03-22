@@ -89,3 +89,10 @@ urlpatterns += [
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+# ── Custom Error Handlers (used when DEBUG = False) ──────────────────
+handler400 = 'core.error_handlers.handler_400'
+handler403 = 'core.error_handlers.handler_403'
+handler404 = 'core.error_handlers.handler_404'
+handler500 = 'core.error_handlers.handler_500'
