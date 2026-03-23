@@ -69,6 +69,10 @@ class RequestResponseLoggingMiddleware:
         Called when a view raises an unhandled exception.
         Logs the full traceback at ERROR level.
         """
+        from django.http import Http404
+        if isinstance(exception, Http404):
+            return None
+
         client_ip = self._get_client_ip(request)
         logger.error(
             "Unhandled Exception: %s %s | IP: %s\n%s",
