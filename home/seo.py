@@ -7,7 +7,7 @@ Centralized here for easy maintenance.
 SITE_SEO = {
     "site_name": "Sea Cox's Fire & Safety LLC",
     "site_url": "https://seacoxfire.com",
-    "default_image": "/static/assets/images/logo-final.png",
+    "default_image": "/static/assets/images/logo-full.png",
     "locale": "en_US",
     "twitter_handle": "@seacoxfire",
 }

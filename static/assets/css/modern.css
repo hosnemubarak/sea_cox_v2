@@ -1,10 +1,7 @@
 /* ==========================================================================
-   Sea Cox's Fire & Safety — Modern Design System 2026 v2.0
-   Premium, performance-optimized design with refined micro-interactions
+   Sea Cox's Fire & Safety — Modern Design System 2026 v3.0
+   Premium, lightweight, cPanel-optimized design
    ========================================================================== */
-
-/* ---------- Google Fonts (preloaded via link in head) ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 /* ---------- CSS Custom Properties ---------- */
 :root {
@@ -38,23 +35,23 @@
   --grad-hero: linear-gradient(135deg, rgba(10, 22, 40, 0.88) 0%, rgba(230, 57, 70, 0.55) 100%);
   --grad-surface: linear-gradient(180deg, var(--white) 0%, var(--slate-50) 100%);
 
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.06);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
-  --shadow-glow: 0 0 30px rgba(230, 57, 70, 0.25);
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
-  --shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.04);
+  /* Shadows — refined depth for modern realism */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 20px -4px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 30px -6px rgba(0, 0, 0, 0.1), 0 8px 12px -6px rgba(0, 0, 0, 0.05);
+  --shadow-2xl: 0 28px 56px -16px rgba(0, 0, 0, 0.18);
+  --shadow-glow: 0 0 24px rgba(230, 57, 70, 0.2);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 12px 32px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.03);
 
   /* Typography */
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
 
   /* Spacing */
-  --section-pad: 100px;
+  --section-pad: 96px;
   --container-max: 1200px;
 
   /* Border Radius */
@@ -95,6 +92,7 @@ body {
   color: var(--slate-700);
   background: var(--white);
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 img {
@@ -142,26 +140,27 @@ h6 {
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   padding: 14px 32px;
   border: none;
   border-radius: var(--radius-xl);
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   cursor: pointer;
   transition: var(--transition-smooth);
   letter-spacing: 0.3px;
   position: relative;
   overflow: hidden;
   white-space: nowrap;
+  text-transform: none;
 }
 
 .btn::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent);
   opacity: 0;
   transition: var(--transition-smooth);
 }
@@ -173,41 +172,42 @@ h6 {
 .btn-primary {
   background: var(--grad-fire);
   color: var(--white);
-  box-shadow: 0 4px 16px rgba(230, 57, 70, 0.3);
+  box-shadow: 0 4px 14px rgba(230, 57, 70, 0.28);
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(230, 57, 70, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(230, 57, 70, 0.35);
 }
 
 .btn-primary:active {
-  transform: translateY(-1px);
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(230, 57, 70, 0.3);
 }
 
 .btn-outline {
   background: transparent;
   color: var(--white);
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(4px);
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: var(--white);
-  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
 }
 
 .btn-dark {
   background: var(--navy-deep);
   color: var(--white);
-  box-shadow: 0 2px 8px rgba(10, 22, 40, 0.2);
+  box-shadow: 0 2px 8px rgba(10, 22, 40, 0.18);
 }
 
 .btn-dark:hover {
   background: var(--navy-mid);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(10, 22, 40, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(10, 22, 40, 0.25);
 }
 
 /* ---------- Section Utilities ---------- */
@@ -236,41 +236,41 @@ h6 {
 
 .section-header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 56px;
 }
 
 .section-header .label {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 3px;
   color: var(--fire-primary);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   padding: 8px 20px;
   background: var(--grad-fire-subtle);
   border-radius: var(--radius-xl);
-  border: 1px solid rgba(230, 57, 70, 0.08);
+  border: 1px solid rgba(230, 57, 70, 0.06);
 }
 
 .section-dark .section-header .label {
-  background: rgba(230, 57, 70, 0.15);
-  border-color: rgba(230, 57, 70, 0.2);
+  background: rgba(230, 57, 70, 0.12);
+  border-color: rgba(230, 57, 70, 0.18);
 }
 
 .section-header h2 {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-weight: 800;
-  margin-bottom: 16px;
-  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  letter-spacing: -0.025em;
 }
 
 .section-header p {
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   color: var(--slate-500);
-  max-width: 600px;
+  max-width: 580px;
   margin: 0 auto;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 .section-dark .section-header p {
@@ -520,12 +520,12 @@ h6 {
 }
 
 .hero h1 {
-  font-size: 3.6rem;
+  font-size: 3.4rem;
   font-weight: 900;
   color: var(--white);
   margin-bottom: 24px;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
   animation: fadeInUp 0.8s ease 0.2s forwards;
   opacity: 0;
 }
@@ -619,7 +619,7 @@ h6 {
 .product-card {
   background: var(--white);
   border-radius: var(--radius-lg);
-  padding: 36px 24px 28px;
+  padding: 32px 24px 28px;
   text-align: center;
   box-shadow: var(--shadow-card);
   transition: var(--transition-smooth);
@@ -634,7 +634,7 @@ h6 {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: var(--grad-fire);
   transform: scaleX(0);
   transition: var(--transition-smooth);
@@ -646,46 +646,47 @@ h6 {
 }
 
 .product-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   box-shadow: var(--shadow-card-hover);
 }
 
 .product-card .product-img-wrap {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 20px;
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--grad-fire-subtle);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-lg);
   transition: var(--transition-smooth);
-  border: 1px solid rgba(230, 57, 70, 0.06);
+  border: 1px solid rgba(230, 57, 70, 0.05);
 }
 
 .product-card:hover .product-img-wrap {
-  background: rgba(230, 57, 70, 0.1);
-  transform: scale(1.08);
-  border-color: rgba(230, 57, 70, 0.15);
+  background: rgba(230, 57, 70, 0.08);
+  transform: scale(1.06);
+  border-color: rgba(230, 57, 70, 0.12);
 }
 
 .product-card .product-img-wrap img {
-  max-width: 60px;
-  max-height: 60px;
+  max-width: 52px;
+  max-height: 52px;
   object-fit: contain;
 }
 
 .product-card h5 {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   margin-bottom: 8px;
   color: var(--navy-deep);
+  letter-spacing: -0.01em;
 }
 
 .product-card p {
   font-size: 0.84rem;
   color: var(--slate-500);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 /* ---------- Client Cards ---------- */
@@ -1149,30 +1150,30 @@ h6 {
 .contact-form-card {
   background: var(--white);
   border-radius: var(--radius-lg);
-  padding: 44px;
+  padding: 40px;
   box-shadow: var(--shadow-lg);
   border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .contact-form-card h4 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-bottom: 28px;
   letter-spacing: -0.01em;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 15px 20px;
+  padding: 14px 18px;
   background: var(--slate-50);
-  border: 2px solid var(--slate-200);
+  border: 1.5px solid var(--slate-200);
   border-radius: var(--radius-md);
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   color: var(--navy-deep);
   transition: var(--transition-fast);
   outline: none;
@@ -1181,17 +1182,18 @@ h6 {
 .form-group input::placeholder,
 .form-group textarea::placeholder {
   color: var(--slate-400);
+  font-weight: 400;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: var(--fire-primary);
-  box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.08);
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.06);
   background: var(--white);
 }
 
 .form-group textarea {
-  min-height: 140px;
+  min-height: 130px;
   resize: vertical;
 }
 
@@ -1325,11 +1327,11 @@ h6 {
 }
 
 .page-header h1 {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-weight: 800;
   color: var(--white);
-  margin-bottom: 16px;
-  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  letter-spacing: -0.025em;
   animation: fadeInUp 0.6s ease forwards;
 }
 
@@ -1337,7 +1339,7 @@ h6 {
   display: flex;
   justify-content: center;
   gap: 8px;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   animation: fadeInUp 0.6s ease 0.15s forwards;
   opacity: 0;
 }

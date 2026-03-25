@@ -66,13 +66,16 @@
     <meta name="theme-color" content="#0A1628">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/logo-final-2.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'assets/images/logo-final-2.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'assets/images/favicon.png' %}">
 
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Google Fonts (non-blocking) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap">
 
     <!-- Font Awesome 6 (async load) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -92,7 +95,7 @@
         "name": "Sea Cox's Fire & Safety LLC",
         "alternateName": "SCFS",
         "url": "https://seacoxfire.com",
-        "logo": "https://seacoxfire.com{% static 'assets/images/logo-final.png' %}",
+        "logo": "https://seacoxfire.com{% static 'assets/images/logo-full.png' %}",
         "description": "DCD Grade A+ approved fire protection company in Dubai providing fire alarm systems, firefighting equipment, and fire engineering services.",
         "foundingDate": "2020",
         "address": {
@@ -180,7 +183,7 @@
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="container">
             <a href="{% url 'home:home' %}" class="navbar-brand" aria-label="Sea Cox's Fire & Safety - Home">
-                <img src="{% static 'assets/images/logo-final.png' %}" alt="Sea Cox's Fire & Safety Logo" width="56"
+                <img src="{% static 'assets/images/logo-full.png' %}" alt="Sea Cox's Fire & Safety Logo" width="56"
                     height="56">
                 <div class="brand-text">
                     Sea Cox's
