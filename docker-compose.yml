@@ -17,13 +17,9 @@ services:
     container_name: seacox-web
     restart: unless-stopped
     ports:
-      - "8090:8000"
+      - "8000:8000"
     env_file:
       - .env
     volumes:
-      # Persist logs outside the container
       - ./logs:/app/logs
-      # Persist uploaded media files
       - ./media:/app/media
-    environment:
-      - DJANGO_SETTINGS_MODULE=sea_cox_v2.settings

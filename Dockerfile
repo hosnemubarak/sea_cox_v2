@@ -8,22 +8,12 @@
 FROM python:3.12-slim
 
 # ── Environment variables ────────────────────────────────────────────
-# Prevent Python from writing .pyc files and enable unbuffered output
-# (unbuffered ensures logs appear immediately in `docker logs`)
+# Prevent .pyc files and enable unbuffered output for docker logs
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
 # ── Set working directory ────────────────────────────────────────────
 WORKDIR /app
-
-# ── Install system dependencies ──────────────────────────────────────
-# Only what we need: gcc for Pillow, libjpeg/zlib for image support
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        gcc \
-        libjpeg62-turbo-dev \
-        zlib1g-dev \
-    && rm -rf /var/lib/apt/lists/*
 
 # ── Install Python dependencies ──────────────────────────────────────
 # Copy requirements first for Docker layer caching
@@ -39,7 +29,8 @@ RUN mkdir -p /app/logs
 
 # ── Collect static files ─────────────────────────────────────────────
 # WhiteNoise serves them directly — no Nginx needed
-RUN python manage.py collectstatic --noinput
+# Uses a dummy secret key for collectstatic only (not used at runtime)
+RUN SECRET_KEY=build-only-dummy-key python manage.py collectstatic --noinput
 
 # ── Create non-root user for security ────────────────────────────────
 RUN addgroup --system appuser && \
@@ -55,11 +46,11 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/')" || exit 1
 
 # ── Start Gunicorn ───────────────────────────────────────────────────
-# Workers = (2 × CPU cores) + 1 — default 3 is fine for a small site
+# 2 workers is enough for a small static site
 CMD ["gunicorn", \
      "sea_cox_v2.wsgi:application", \
      "--bind", "0.0.0.0:8000", \
-     "--workers", "3", \
+     "--workers", "2", \
      "--timeout", "120", \
      "--access-logfile", "-", \
      "--error-logfile", "-", \
